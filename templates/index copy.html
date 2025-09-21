@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>AI Startup Analyst</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="p-4">
+    <div class="container">
+        <h1 class="mb-4">AI Startup Analyst</h1>
+        <p>Upload a pitch deck image and provide details to generate an investment deal note.</p>
+
+        <div id="loading" class="d-none alert alert-info">Processing your request...</div>
+        <div id="error-message" class="d-none alert alert-danger"></div>
+
+        <form id="analysis-form">
+            <div class="form-group">
+                <label for="pitch_deck">Pitch Deck (JPG)</label>
+                <input type="file" class="form-control-file" id="pitch_deck" name="pitch_deck" accept=".jpg" required>
+            </div>
+            <div class="form-group">
+                <label for="sector">Sector</label>
+                <input type="text" class="form-control" id="sector" name="sector" value="B2B SaaS">
+            </div>
+            <div class="form-group">
+                <label for="geo">Geography</label>
+                <input type="text" class="form-control" id="geo" name="geo" value="US">
+            </div>
+            <div class="form-group">
+                <label for="churn_rate">Churn Rate</label>
+                <input type="number" step="0.01" class="form-control" id="churn_rate" name="churn_rate" value="0.18">
+            </div>
+            <div class="form-group">
+                <label for="market_size">Market Size</label>
+                <input type="number" class="form-control" id="market_size" name="market_size" value="5000000000">
+            </div>
+            <button type="submit" class="btn btn-primary">Analyze</button>
+        </form>
+
+        <div id="results" class="mt-5 d-none">
+            <h2>Generated Deal Note</h2>
+            <pre id="deal-note-output" class="bg-light p-3"></pre>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('analysis-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('loading').classList.remove('d-none');
+            document.getElementById('error-message').classList.add('d-none');
+            document.getElementById('results').classList.add('d-none');
+
+            const form = event.target;
+            const formData = new FormData(form);
+
+            fetch('/analyze', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json().then(data => {
+                if (!response.ok) {
+                    throw new Error(data.error || 'Server error');
+                }
+                return data;
+            }))
+            .then(data => {
+                document.getElementById('deal-note-output').textContent = JSON.stringify(data, null, 4);
+                document.getElementById('results').classList.remove('d-none');
+            })
+            .catch(error => {
+                document.getElementById('error-message').textContent = `Error: ${error.message}`;
+                document.getElementById('error-message').classList.remove('d-none');
+            })
+            .finally(() => {
+                document.getElementById('loading').classList.add('d-none');
+            });
+        });
+    </script>
+</body>
+</html>

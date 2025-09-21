@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>AI Startup Analyst - Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="p-4">
+    <div class="container">
+        <h1 class="mb-4">Deal Note for Startup Analysis</h1>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Executive Summary</h4>
+            </div>
+            <div class="card-body">
+                <p>{{ deal_note.summary }}</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Benchmarking Analysis</h4>
+            </div>
+            <div class="card-body">
+                <p><strong>Average Churn Rate:</strong> {{ deal_note.benchmark.avg_churn_rate }}</p>
+                <p><strong>Average Market Size:</strong> {{ "{:,.2f}".format(deal_note.benchmark.avg_market_size) if deal_note.benchmark.avg_market_size != "N/A" else deal_note.benchmark.avg_market_size }}</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Risk Assessment</h4>
+            </div>
+            <div class="card-body">
+                {% if deal_note.risks %}
+                    <ul>
+                    {% for risk in deal_note.risks %}
+                        <li>{{ risk }}</li>
+                    {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No significant risks detected.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <a href="/" class="btn btn-secondary">Analyze Another Startup</a>
+    </div>
+</body>
+</html>

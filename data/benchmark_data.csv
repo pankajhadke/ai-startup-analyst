@@ -1,0 +1,5 @@
+sector,geography,avg_churn_rate,avg_market_size
+B2B SaaS,US,0.15,4500000000.0
+B2B SaaS,EU,0.18,3200000000.0
+FinTech,US,0.12,9800000000.0
+FinTech,EU,0.10,7500000000.0

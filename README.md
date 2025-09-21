@@ -18,6 +18,18 @@ This project, phaAI-gen, is an AI-powered analyst platform. It streamlines the e
 -   **Python:** Flask (web framework), `pdf2image` (for PDF handling).
 -   **Other:** Docker (for containerization on Cloud Run).
 
+## Live Demo
+
+Check out the live prototype running on Google Cloud Run:
+
+**[https://phaai-gen-1043984975656.asia-southeast1.run.app/]**
+
+**[phaAI-gen]**
+
+## GitHub Repository
+
+**[https://github.com/pankajhadke/ai-startup-analyst.git]**
+
 ## Getting Started
 
 For detailed setup and testing instructions for this prototype, please refer to the **[INSTRUCTIONS.md](INSTRUCTIONS.md)** file in this repository.

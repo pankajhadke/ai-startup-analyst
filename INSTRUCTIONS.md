@@ -34,7 +34,7 @@ The prototype requires the **Cloud Vision API** and **Vertex AI API**. These API
 Open Google Cloud Shell and run:
 
 ```sh
-git clone <ULR>
+git clone https://github.com/pankajhadke/ai-startup-analyst.git
 cd ai-startup-analyst
 
 ### Step 2: Set up the Python Environment

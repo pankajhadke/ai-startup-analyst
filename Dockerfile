@@ -16,7 +16,10 @@ FROM python:3.12-slim
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the installed dependencies from the builder stage
+# Install poppler-utils for testing
+RUN apt-get update && apt-get install -y poppler-utils
+
+# Copy the installed Python dependencies from the builder stage
 COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
 
 # Copy your application code
